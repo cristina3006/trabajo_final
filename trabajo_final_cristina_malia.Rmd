@@ -25,18 +25,16 @@ names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Error or Problem"] = "Er
 
 View(trabajo_final_tabla)
 ```
-###Primero vamos a comenzar renombrando algunos de los campos que contiene la tabla nombrada "trabajo_final_tabla". Estos campos seran: "Width",  "Thickness", "Projected width", "Projected Thickness", "Projected Length", "Weigth", "Bag", "Stage", "Source" y "Error or Problem". Que serán renombrados, en el mismo orden, como: "Ancho", "Espesor", "Ancho_Proyectado", "Espesor_Proyectado", "Longitud_Proyectada", "Peso", "Número", "Escenario", "Parte", "Fuente" y "Error_o_Problema".  
+###Primero vamos a comenzar renombrando los campos que contiene la tabla nombrada "trabajo_final_tabla". Estos campos seran: "Width",  "Thickness", "Projected width", "Projected Thickness", "Projected Length", "Weigth", "Bag", "Stage", "Source" y "Error or Problem". Que serán renombrados, en el mismo orden, como: "Ancho", "Espesor", "Ancho_Proyectado", "Espesor_Proyectado", "Longitud_Proyectada", "Peso", "Número", "Escenario", "Parte", "Fuente" y "Error_o_Problema".  
 ###Esto servirá para tener más claro los datos que tenemos en la tabla. 
 
 ```{r cars}
-
-
+trabajo_final_tabla$Parte=factor(trabajo_final_tabla$Parte, levels = c("Tip" ,"Complete" , "Base"), labels = c ("Punta", "Completo", "Base"))
 
 ```
 
-## Including Plots
+###Lo que haremos a continuación será asignar etiquetas a uno de los campos de la tabla para así tener más claro cada uno de los detalles. 
 
-You can also embed plots, for example:
 
 ```{r pressure, echo=FALSE}
 plot(pressure)
