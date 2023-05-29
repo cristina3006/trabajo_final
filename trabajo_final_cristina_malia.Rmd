@@ -1,0 +1,45 @@
+---
+title: "trabajo_final_cristina_malia_muñoz"
+author: "cristina malia"
+date: "2023-05-28"
+output: html_document
+---
+
+##Conjunto de datos regionales del valle del río Belice
+
+```{r setup, include=FALSE}
+
+names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Width (mm)"] = "Ancho"
+names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Thickness (mm)"] = "Espesor (mm)"
+names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Length (mm)"] = "Longitud (mm)"
+names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Projected Width (mm)"] = "Ancho_Proyectado (mm)"
+names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Projected Thickness (mm)"] = "Espesor_Proyectado (mm)"
+names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Projected Length (mm)"] = "Longitud_Proyectada (mm)"
+names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Weigth (g)"] = "Peso (g)"
+
+names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Bag#"] = "Numero"
+names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Stage"] = "Escenario"
+names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Portion"] = "Parte"
+names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Source"] = "Fuente"
+names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Error or Problem"] = "Error_o_Problema"
+
+View(trabajo_final_tabla)
+```
+###Primero vamos a comenzar renombrando algunos de los campos que contiene la tabla nombrada "trabajo_final_tabla". Estos campos seran: "Width",  "Thickness", "Projected width", "Projected Thickness", "Projected Length", "Weigth", "Bag", "Stage", "Source" y "Error or Problem". Que serán renombrados, en el mismo orden, como: "Ancho", "Espesor", "Ancho_Proyectado", "Espesor_Proyectado", "Longitud_Proyectada", "Peso", "Número", "Escenario", "Parte", "Fuente" y "Error_o_Problema".  
+###Esto servirá para tener más claro los datos que tenemos en la tabla. 
+
+```{r cars}
+
+
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
