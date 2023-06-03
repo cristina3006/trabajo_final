@@ -2,13 +2,15 @@
 title: "trabajo_final_cristina_malia_muñoz"
 author: "cristina malia"
 date: "2023-05-28"
-output: html_document
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
 ---
 
 ##Conjunto de datos regionales del valle del río Belice
 
 ```{r setup, include=FALSE}
-
 names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Width (mm)"] = "Ancho"
 names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Thickness (mm)"] = "Espesor (mm)"
 names(trabajo_final_tabla)[names(trabajo_final_tabla)=="Length (mm)"] = "Longitud (mm)"
@@ -33,11 +35,100 @@ trabajo_final_tabla$Parte=factor(trabajo_final_tabla$Parte, levels = c("Tip" ,"C
 
 ```
 
-###Lo que haremos a continuación será asignar etiquetas a uno de los campos de la tabla para así tener más claro cada uno de los detalles. 
+###Lo que haremos a continuación será asignar etiquetas a uno de los campos de la tabla para así tener más claro cada uno de los detalles. El campo de "Parte" esta clasificado en "Tip", "Complete" y "Base"que serán sustituidos por "Punta", "Completo" y "Base". 
 
 
 ```{r pressure, echo=FALSE}
-plot(pressure)
+# Crear el data frame con los datos proporcionados
+# Datos
+data <- data.frame(
+  Bag = c("J0062", "J0062", "J0063", "J0065", "J0032", "J0070", "J0070", "J0093", "J0093", "J0093",
+          "J0093", "J0093", "J0095", "J0095", "J0095", "J0095", "J0095", "J0095", "J0095", "J0095",
+          "J0095", "J0095", "J0103", "J0103", "J0106", "J0106", "J0106", "J0106", "J0106", "J0106",
+          "J0106", "J0106", "J0106", "J0106", "J0106", "J0106", "J0106", "J0106", "J0106", "J0106",
+          "J0106", "J0106", "J0106", "J0106", "J0106", "J0106", "J0121", "J0121", "J0121",
+          "J0128", "J0128", "J0128", "J0128", "J0128", "J0128", "J0128", "J0128", "J0128",
+          "J0128", "J0128", "J0128", "J0128", "J0128"),
+  Stage = c(2, 2, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2,
+            2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 1, 1, 1, 2, 2,
+            2, 3, 3, 3, 3, 3, 3),
+  Portion = c("Punta", "Punta", "Completo", "Punta", "Base", "Punta", "Completo", "Punta", "Punta", "Base",
+              "Base", "Base", "Punta", "Punta", "Completo", "Punta", "Punta", "Punta", "Base", "Base", "Punta",
+              "Base", "Punta", "Base", "Base", "Punta", "Punta", "Punta", "Punta", "Completo", "Base", "Punta")
+)
+
+# Tabla de frecuencias
+tabla_frecuencias <- table(data$Bag, data$Stage, data$Portion)
+
+View(tabla_frecuencias)  
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+###Para continuar con el trabajo debemos generar varias tablas de frecuencia para ordenar variables cuantitativas. Estas tabalas de frecuencias servirán para mostrar de forma ordenada un conjunto de datos estadísticos y a cada uno de ellos le asigna una frecuencia que, en pocas palabras, son las veces que se repite un número o dato. 
+
+```{r}
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+# Datos
+x = np.array([27.10, 29.50, 33.10, 44.00, 32.10, 33.00, 34.10, 36.20, 35.80, 41.60, 43.90, 47.40, 27.00, 33.90, 36.30, 44.70, 42.00, 32.00, 35.10, 47.00, 32.30, 34.80, 35.60, 34.40, 43.00, 45.30, 50.00, 33.00, 30.50, 42.00, 33.10, 39.70, 45.80, 31.50, 40.30, 24.40, 31.00, 21.00, 43.80, 41.50, 20.70, 32.90, 37.90, 35.90, 27.80, 31.00, 37.90, 40.00, 40.10, 38.60, 24.10, 36.50, 25.50, 28.20, 32.80, 46.20, 63.80, 37.60, 39.00, 39.60, 40.50, 37.70, 41.70, 50.00, 30.60, 30.50, 36.30, 27.10, 29.10, 25.20])
+y = np.array([8.20, 9.70, 11.40, 25.20, 9.50, 7.90, 9.00, 6.30, 12.20, 11.60, 9.00, 8.00, 7.90, 10.50, 12.80, 8.10, 8.50, 7.20, 9.30, 11.20, 8.80, 8.20, 4.30, 7.50, 10.20, 9.10, 14.60, 8.20, 10.50, 5.30, 7.80, 9.10, 9.10, 10.40, 8.80, 7.50, 6.00, 8.00, 8.50, 12.50, 8.20, 9.10, 8.20, 5.40, 6.00, 6.90, 7.40, 5.40, 6.90, 9.10, 8.20, 8.20, 6.10, 7.20, 6.30, 11.50, 9.00, 7.00, 9.50, 9.70, 11.00, 8.30, 9.80, 9.30, 8.80, 10.50])
+
+# Crear el objeto de regresión lineal
+regression = LinearRegression()
+
+# Ajustar el modelo de regresión lineal
+regression.fit(x.reshape(-1, 1), y)
+
+# Coeficiente de determinación (R-cuadrado)
+r_squared = regression.score(x.reshape(-1, 1), y)
+
+# Predicción de valores
+x_pred = np.array([20, 30, 40, 50])  # Valores para predecir
+y_pred = regression.predict(x_pred.reshape(-1, 1))
+
+# Imprimir coeficientes
+print("Coeficiente de intersección (a):", regression.intercept_)
+print("Coeficiente de pendiente (b):", regression.coef_[0])
+print("Coeficiente de determinación (R-cuadrado):", r_squared)
+
+# Graficar los datos y la línea de regresión
+plt.scatter(x, y, color='blue', label='Datos')
+plt.plot(x_pred, y_pred, color='red', label='Regresión lineal')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.show()
+
+```
+
+``
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
